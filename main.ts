@@ -1,4 +1,3 @@
-// const OpenCC = require('opencc');
 import pkg from 'opencc';
 const {OpenCC} = pkg;
 
