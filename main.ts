@@ -1,1 +1,5 @@
-console.log("a");
+const OpenCC = require('opencc');
+
+async function main() { 
+    console.log("a");
+}
