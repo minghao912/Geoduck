@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-        "module": "commonjs"
-    },
-    "exclude": [
-        "node_modules"
-    ]
+        "target": "es3",
+        "watch": true,
+        "lib": ["DOM", "ES2017"]
+    }
 }
