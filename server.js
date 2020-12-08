@@ -1,9 +1,5 @@
-const http = require('http');
-
-function onRequest(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write("Hello World");
-    response.end();
-}
-
-http.createServer(onRequest).listen(8000);
+"use strict";
+exports.__esModule = true;
+var http = require("http");
+var router = require("./router");
+http.createServer(router.handleRequest).listen(8080);

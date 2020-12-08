@@ -1,9 +1,15 @@
-import * as http from 'http';
+import * as fs from 'fs';
 
-function onRequest(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write("Hello World");
-    response.end();
-}
+export function run(response): void {
+    response.writeHead(200, {"Content-Type": "application/json"});
 
-http.createServer(onRequest).listen(8080);
+    fs.readFile('./test.json', null, (err, data) => {
+        if (err) {
+            response.writeHead(404, {"Content-Type": "text/plain"});
+            response.write("File not found");
+        } else {
+            response.write(data);
+        }
+        response.end();
+    })
+}   
