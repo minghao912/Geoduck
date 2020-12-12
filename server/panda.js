@@ -38,6 +38,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.run = void 0;
 var opencc_1 = require("opencc");
+/**
+ * Runs PandaCC
+ * @param url The GET request URL. In form "/direction?query=abc"
+ * @param response The http response element.
+ *
+ * This example converts "汉字" from Simplified to Traditional
+ * @example run("/s2t?query=汉字", response)
+ */
 function run(url, response) {
     response.writeHead(200, { "Content-Type": "application/json" });
     // a path in form "/panda/s2t" would return 's2t'

@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports.handleRequest = void 0;
 var url = require("url");
 var fs = require("fs");
-var test = require("./test");
+var test = require("./test/test");
 var panda = require("./panda");
 function renderHTML(filepath, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
