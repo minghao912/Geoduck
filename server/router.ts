@@ -1,6 +1,6 @@
 import * as url from 'url';
 import * as fs from 'fs';
-import * as test from './test';
+import * as test from './test/test';
 import * as panda from './panda';
 
 function renderHTML(filepath: string, response): void {
