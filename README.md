@@ -1,4 +1,4 @@
-**PandaCC**
+# PandaCC
 
 A web application to convert between Chinese Simplified and Chinese Traditional. Might add support for Japanese 旧字体 and 新字体 in the future.
 
