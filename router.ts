@@ -20,8 +20,9 @@ function renderHTML(filepath: string, response): void {
 export function handleRequest(request, response): void {
     const path = url.parse(request.url).pathname;
 
+    // Transfer all "/panda/xxx" requests to panda
     const pathSplit = path.split('/');
-    if (pathSplit.length >= 1 && pathSplit[1] == 'panda')   // transfers all "/panda/xxx" requests to panda
+    if (pathSplit.length >= 1 && pathSplit[1] == 'panda')
         return panda.run(path, response);
 
     switch (path) {
