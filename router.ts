@@ -19,11 +19,12 @@ function renderHTML(filepath: string, response): void {
 
 export function handleRequest(request, response): void {
     const path = url.parse(request.url).pathname;
+    const href = url.parse(request.url).href;   // includes ?xxx portion
 
     // Transfer all "/panda/xxx" requests to panda
     const pathSplit = path.split('/');
     if (pathSplit.length >= 1 && pathSplit[1] == 'panda')
-        return panda.run(path, response);
+        return panda.run(href, response);
 
     switch (path) {
         case '/':

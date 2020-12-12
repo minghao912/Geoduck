@@ -37,10 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.run = void 0;
-function run(path, response) {
+var opencc_1 = require("opencc");
+function run(url, response) {
     response.writeHead(200, { "Content-Type": "application/json" });
-    var dir = path.split('/')[2]; // a path in form "/panda/s2t" would return 's2t'
-    getData(dir).then(function (panda) {
+    // a path in form "/panda/s2t" would return 's2t'
+    var path = handleURL(url);
+    var dir = path[0];
+    var query = path[1];
+    getData(dir, query).then(function (panda) {
         console.log(panda);
         response.write(JSON.stringify(panda));
         response.end();
@@ -52,18 +56,40 @@ function run(path, response) {
     });
 }
 exports.run = run;
-function getData(direction) {
+function getData(direction, query) {
     return __awaiter(this, void 0, void 0, function () {
-        var data;
+        var data, converter, result;
         return __generator(this, function (_a) {
-            data = {
-                "original": "",
-                "conversion": ""
-            };
-            return [2 /*return*/, new Promise(function (resolve, reject) {
-                    resolve(data);
-                    reject(null);
-                })];
+            switch (_a.label) {
+                case 0:
+                    data = {
+                        "original": "",
+                        "conversion": ""
+                    };
+                    if (["s2t", "t2s"].indexOf(direction) > -1) // Only supported conversion directions
+                        converter = new opencc_1.OpenCC(direction + ".json");
+                    return [4 /*yield*/, converter.convertPromise(query)];
+                case 1:
+                    result = _a.sent();
+                    data = {
+                        "original": query,
+                        "conversion": result
+                    };
+                    return [2 /*return*/, new Promise(function (resolve, reject) {
+                            resolve(data);
+                            reject(null);
+                        })];
+            }
         });
     });
+}
+function handleURL(url) {
+    var path = url.split(/[/?]/); // Split on "/" or "?"
+    var dir = path[2];
+    var queryEncoded = path[3]; // This uses HTML URL Encoding, e.g. "%E6%B1", so need to decode it to Unicode
+    var queryDecoded = decodeURIComponent(queryEncoded);
+    console.log("> Panda received path " + path);
+    console.log("> Parsed direction: " + dir);
+    console.log("> Parsed query: " + queryEncoded.substring(6) + ", decoded to: " + queryDecoded.substring(6));
+    return [dir, queryDecoded];
 }

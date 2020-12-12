@@ -20,9 +20,11 @@ function renderHTML(filepath, response) {
 }
 function handleRequest(request, response) {
     var path = url.parse(request.url).pathname;
+    var href = url.parse(request.url).href; // includes ?xxx portion
+    // Transfer all "/panda/xxx" requests to panda
     var pathSplit = path.split('/');
-    if (pathSplit.length >= 1 && pathSplit[1] == 'panda') // transfers all "/panda/xxx" requests to panda
-        return panda.run(path, response);
+    if (pathSplit.length >= 1 && pathSplit[1] == 'panda')
+        return panda.run(href, response);
     switch (path) {
         case '/':
             renderHTML('./index.html', response);
