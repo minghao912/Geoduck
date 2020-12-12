@@ -1,6 +1,6 @@
 const http = require('http');
 
-http.get('http://localhost:8080/test', (resp) => {
+http.get('http://localhost:8080/panda/xxx', (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.

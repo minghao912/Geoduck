@@ -4,6 +4,7 @@ exports.handleRequest = void 0;
 var url = require("url");
 var fs = require("fs");
 var test = require("./test");
+var panda = require("./panda");
 function renderHTML(filepath, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
     fs.readFile(filepath, null, function (err, data) {
@@ -19,6 +20,9 @@ function renderHTML(filepath, response) {
 }
 function handleRequest(request, response) {
     var path = url.parse(request.url).pathname;
+    var pathSplit = path.split('/');
+    if (pathSplit.length >= 1 && pathSplit[1] == 'panda') // transfers all "/panda/xxx" requests to panda
+        return panda.run(path, response);
     switch (path) {
         case '/':
             renderHTML('./index.html', response);

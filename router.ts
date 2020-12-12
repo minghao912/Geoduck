@@ -1,6 +1,7 @@
 import * as url from 'url';
 import * as fs from 'fs';
 import * as test from './test';
+import * as panda from './panda';
 
 function renderHTML(filepath: string, response): void {
     response.writeHead(200, {'Content-Type': 'text/html'});
@@ -16,8 +17,13 @@ function renderHTML(filepath: string, response): void {
     });
 }
 
-export function handleRequest(request, response) {
+export function handleRequest(request, response): void {
     const path = url.parse(request.url).pathname;
+
+    const pathSplit = path.split('/');
+    if (pathSplit.length >= 1 && pathSplit[1] == 'panda')   // transfers all "/panda/xxx" requests to panda
+        return panda.run(path, response);
+
     switch (path) {
         case '/':
             renderHTML('./index.html', response);
