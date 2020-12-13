@@ -59,7 +59,7 @@ function run(url, response) {
     })["catch"](function (err) {
         console.log(err);
         response.writeHead(404, { 'Content-Type': 'text/plain' });
-        response.write('File not found');
+        response.write('Error generating conversion');
         response.end();
     });
 }
