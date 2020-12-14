@@ -1,5 +1,6 @@
 import * as fs from 'fs';
-import { OpenCC } from 'opencc';
+// import { OpenCC } from 'opencc'; Works on Windows, 1.1.1 fails to install on Linux
+import * as OpenCC from 'opencc-js';
 
 /**
  * Runs PandaCC
