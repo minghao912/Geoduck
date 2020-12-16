@@ -1,6 +1,6 @@
 const http = require('http');
 
-http.get('http://dragonfruit.tk:8080/', (resp) => {
+http.get('http://node.dragonfruit.tk:8080/', (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.

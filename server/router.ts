@@ -10,7 +10,7 @@ function renderHTML(filepath: string, response): void {
     fs.readFile(filepath, null, (err, data) => {
         if (err) {
             response.writeHead(404);
-            response.write('File not found: ./index.html');
+            response.write('File not found: ' + filepath);
         } else {
             response.write(data);
         }
@@ -40,7 +40,7 @@ export function handleRequest(request, response): void {
     // All other paths
     switch (path) {
         case '/':
-            renderHTML('./index.html', response);
+            renderHTML('./test/index.html', response);
             break;
         case '/test':
             test.run(response);
