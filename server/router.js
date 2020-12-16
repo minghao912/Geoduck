@@ -5,6 +5,7 @@ var url = require("url");
 var fs = require("fs");
 var test = require("./test/test");
 var panda = require("./panda");
+var panda_linux = require("./panda_linux");
 function renderHTML(filepath, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
     fs.readFile(filepath, null, function (err, data) {
@@ -23,8 +24,17 @@ function handleRequest(request, response) {
     var href = url.parse(request.url).href; // includes ?xxx portion
     // Transfer all "/panda/xxx" requests to panda
     var pathSplit = path.split('/');
-    if (pathSplit.length >= 1 && pathSplit[1] == 'panda')
-        return panda.run(href, response);
+    var firstDirectory;
+    if (pathSplit.length >= 1) {
+        firstDirectory = pathSplit[1];
+        // For "/panda/xxx"
+        if (firstDirectory == 'panda')
+            return panda.run(href, response);
+        // For "/panda_linux/xxx"
+        if (firstDirectory == 'panda_linux')
+            return panda_linux.run(href, response);
+    }
+    // All other paths
     switch (path) {
         case '/':
             renderHTML('./index.html', response);

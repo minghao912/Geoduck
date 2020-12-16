@@ -1,6 +1,6 @@
 const http = require('http');
 
-http.get('http://localhost:8080/panda/s2t?query=汉字', (resp) => {
+http.get('http://localhost:8080/panda_linux/s2t?query=汉字', (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.

@@ -1,5 +1,4 @@
-import * as fs from 'fs';
-import { OpenCC } from 'opencc'; // Works on Windows, 1.1.1 fails to install on Linux
+import * as OpenCC from 'opencc-js';
 
 /**
  * Runs PandaCC
@@ -36,25 +35,40 @@ interface Panda {
 }
 
 async function getData(direction: string, query: string): Promise<Panda> {
-    let data = {
-        "original": "",
-        "conversion": ""
-    };
+    return new Promise(async (resolve, reject) => {
+        let data: Panda = {
+            "original": "",
+            "conversion": ""
+        };
 
-    let converter: OpenCC;
-    if (["s2t", "t2s"].indexOf(direction) > -1)     // Only supported conversion directions
-        converter = new OpenCC(`${direction}.json`);
+        // Get direction
+        let dir: [string, string];
+        switch(direction) {
+            case "s2t":
+                dir = ['cn', 't'];
+                break;
+            case "t2s":
+                dir = ['t', 'cn'];
+                break;
+            default:
+                return reject(null);
+        }
 
-    // Convert and put into correct form
-    const result = await converter.convertPromise(query);
-    data = {
-        "original": query,
-        "conversion": result
-    }
+        // Convert
+        let result: string;
+        await OpenCC.Converter(dir[0], dir[1]).then(convert => {
+            result = convert(query.substring(6)) as string;   // Remove the "query=" part of the query string
+            console.log("> Result: " + result);
+        });
 
-    return new Promise((resolve, reject) => {
+        // Put into correct form
+        data = {
+            "original": query,
+            "conversion": result
+        }
+
+    
         resolve(data);
-        reject(null);
     });
 }
 
@@ -65,7 +79,7 @@ function handleURL(url: string): [string, string] {
     let queryEncoded = path[3]; // This uses HTML URL Encoding, e.g. "%E6%B1", so need to decode it to Unicode
     let queryDecoded = decodeURIComponent(queryEncoded);
 
-    console.log(`> Panda received path ${path}`);
+    console.log(`> Panda received path ${path.join(", ")}`);
     console.log(`> Parsed direction: ${dir}`);
     console.log(`> Parsed query: ${queryEncoded.substring(6)}, decoded to: ${queryDecoded.substring(6)}`);
 

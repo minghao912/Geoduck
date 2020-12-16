@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.run = void 0;
-var opencc_1 = require("opencc"); // Works on Windows, 1.1.1 fails to install on Linux
+var OpenCC = require("opencc-js");
 /**
  * Runs PandaCC
  * @param url The GET request URL. In form "/direction?query=abc"
@@ -66,28 +66,43 @@ function run(url, response) {
 exports.run = run;
 function getData(direction, query) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, converter, result;
+        var _this = this;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    data = {
-                        "original": "",
-                        "conversion": ""
-                    };
-                    if (["s2t", "t2s"].indexOf(direction) > -1) // Only supported conversion directions
-                        converter = new opencc_1.OpenCC(direction + ".json");
-                    return [4 /*yield*/, converter.convertPromise(query)];
-                case 1:
-                    result = _a.sent();
-                    data = {
-                        "original": query,
-                        "conversion": result
-                    };
-                    return [2 /*return*/, new Promise(function (resolve, reject) {
-                            resolve(data);
-                            reject(null);
-                        })];
-            }
+            return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                    var data, dir, result;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                data = {
+                                    "original": "",
+                                    "conversion": ""
+                                };
+                                switch (direction) {
+                                    case "s2t":
+                                        dir = ['cn', 't'];
+                                        break;
+                                    case "t2s":
+                                        dir = ['t', 'cn'];
+                                        break;
+                                    default:
+                                        return [2 /*return*/, reject(null)];
+                                }
+                                return [4 /*yield*/, OpenCC.Converter(dir[0], dir[1]).then(function (convert) {
+                                        result = convert(query.substring(6)); // Remove the "query=" part of the query string
+                                        console.log("> Result: " + result);
+                                    })];
+                            case 1:
+                                _a.sent();
+                                // Put into correct form
+                                data = {
+                                    "original": query,
+                                    "conversion": result
+                                };
+                                resolve(data);
+                                return [2 /*return*/];
+                        }
+                    });
+                }); })];
         });
     });
 }
@@ -96,7 +111,7 @@ function handleURL(url) {
     var dir = path[2];
     var queryEncoded = path[3]; // This uses HTML URL Encoding, e.g. "%E6%B1", so need to decode it to Unicode
     var queryDecoded = decodeURIComponent(queryEncoded);
-    console.log("> Panda received path " + path);
+    console.log("> Panda received path " + path.join(", "));
     console.log("> Parsed direction: " + dir);
     console.log("> Parsed query: " + queryEncoded.substring(6) + ", decoded to: " + queryDecoded.substring(6));
     return [dir, queryDecoded];
