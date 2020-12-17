@@ -5,7 +5,7 @@
 	export let yeet: number;
 
 	let testVal = 888;
-	let testValStr = testVal as string;
+	let testValStr = testVal.toString();
 </script>
 
 <main>
