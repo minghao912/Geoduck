@@ -35,12 +35,12 @@ interface Panda {
 }
 
 async function getData(direction: string, query: string): Promise<Panda> {
+    let data: Panda = {
+        "original": "",
+        "conversion": ""
+    };
+    
     return new Promise(async (resolve, reject) => {
-        let data: Panda = {
-            "original": "",
-            "conversion": ""
-        };
-
         // Get direction
         let dir: [string, string];
         switch(direction) {
