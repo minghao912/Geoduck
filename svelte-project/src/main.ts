@@ -1,7 +1,7 @@
 //import App from './App.svelte';
-import Main from './Main.svelte';
+import Base from './Base.svelte';
 
-const app = new Main({
+const app = new Base({
 	target: document.body,
 	props: {
 		
