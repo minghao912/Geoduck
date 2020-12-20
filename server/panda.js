@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.run = void 0;
-var opencc_1 = require("opencc"); // Works on Windows, 1.1.1 fails to install on Linux
+//import { OpenCC } from 'opencc'; // Works on Windows, 1.1.1 fails to install on Linux
 /**
  * Runs PandaCC
  * @param url The GET request URL. In form "/direction?query=abc"
@@ -75,7 +75,7 @@ function getData(direction, query) {
                         "conversion": ""
                     };
                     if (["s2t", "t2s"].indexOf(direction) > -1) // Only supported conversion directions
-                        converter = new opencc_1.OpenCC(direction + ".json");
+                        converter = new OpenCC(direction + ".json");
                     return [4 /*yield*/, converter.convertPromise(query)];
                 case 1:
                     result = _a.sent();

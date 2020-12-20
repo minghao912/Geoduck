@@ -66,17 +66,18 @@ function run(url, response) {
 exports.run = run;
 function getData(direction, query) {
     return __awaiter(this, void 0, void 0, function () {
+        var data;
         var _this = this;
         return __generator(this, function (_a) {
+            data = {
+                "original": "",
+                "conversion": ""
+            };
             return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                    var data, dir, result;
+                    var dir, result;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                data = {
-                                    "original": "",
-                                    "conversion": ""
-                                };
                                 switch (direction) {
                                     case "s2t":
                                         dir = ['cn', 't'];

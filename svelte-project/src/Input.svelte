@@ -4,21 +4,28 @@
     const placeholder = "Start typing...";
 
     // Takes the input and sends it to the server
+    // Timeout stuff makes it so that it only runs the conversion when user stops typing for specified delay
+    let timeout = null;
+    const DELAY = 500;
     function handleInput(e: Event): void {
-        const textarea = e.target as HTMLTextAreaElement
-        console.log("> Text input detected in textarea with id " + textarea.id);
+        clearTimeout(timeout);
 
-        switch (textarea.id) {
-            case "simp":
-                communicator.convert(communicator.Direction.s2t, textarea.value).then(output => setOutput(textarea, output));
-                break;
-            case "trad":
-                communicator.convert(communicator.Direction.t2s, textarea.value).then(output => setOutput(textarea, output));
-                break;
-            default:
-                textarea.value = "There was an error parsing your text."
-                break;
-        }
+        timeout = setTimeout(() => {
+            const textarea = e.target as HTMLTextAreaElement
+            console.log("> Text input detected in textarea with id " + textarea.id);
+
+            switch (textarea.id) {
+                case "simp":
+                    communicator.convert(communicator.Direction.s2t, textarea.value).then(output => setOutput(textarea, output));
+                    break;
+                case "trad":
+                    communicator.convert(communicator.Direction.t2s, textarea.value).then(output => setOutput(textarea, output));
+                    break;
+                default:
+                    textarea.value = "There was an error parsing your text."
+                    break;
+            }
+        }, DELAY);
     }
 
     // Takes the output and sets it in the other text box

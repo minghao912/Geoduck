@@ -1,8 +1,10 @@
 import * as url from 'url';
 import * as fs from 'fs';
+
 import * as test from './test/test';
-import * as panda from './panda';
+//import * as panda from './panda';
 import * as panda_linux from './panda_linux';
+import { request } from 'http';
 
 function renderHTML(filepath: string, response): void {
     response.writeHead(200, {'Content-Type': 'text/html'});
@@ -22,15 +24,21 @@ export function handleRequest(request, response): void {
     const path = url.parse(request.url).pathname;
     const href = url.parse(request.url).href;   // includes ?xxx portion
 
+    // Set CORS headers
+    response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    response.setHeader('Access-Control-Request-Method', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+
     // Transfer all "/panda/xxx" requests to panda
     const pathSplit = path.split('/');
     let firstDirectory: string;
     if (pathSplit.length >= 1) {
         firstDirectory = pathSplit[1];
 
-        // For "/panda/xxx"
+        /*// For "/panda/xxx"
         if (firstDirectory == 'panda')
-            return panda.run(href, response);
+            return panda.run(href, response);*/
 
         // For "/panda_linux/xxx"
         if (firstDirectory == 'panda_linux')

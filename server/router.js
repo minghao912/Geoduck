@@ -4,7 +4,7 @@ exports.handleRequest = void 0;
 var url = require("url");
 var fs = require("fs");
 var test = require("./test/test");
-var panda = require("./panda");
+//import * as panda from './panda';
 var panda_linux = require("./panda_linux");
 function renderHTML(filepath, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -22,14 +22,19 @@ function renderHTML(filepath, response) {
 function handleRequest(request, response) {
     var path = url.parse(request.url).pathname;
     var href = url.parse(request.url).href; // includes ?xxx portion
+    // Set CORS headers
+    response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    response.setHeader('Access-Control-Request-Method', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    response.setHeader('Access-Control-Allow-Headers', '*');
     // Transfer all "/panda/xxx" requests to panda
     var pathSplit = path.split('/');
     var firstDirectory;
     if (pathSplit.length >= 1) {
         firstDirectory = pathSplit[1];
-        // For "/panda/xxx"
+        /*// For "/panda/xxx"
         if (firstDirectory == 'panda')
-            return panda.run(href, response);
+            return panda.run(href, response);*/
         // For "/panda_linux/xxx"
         if (firstDirectory == 'panda_linux')
             return panda_linux.run(href, response);
