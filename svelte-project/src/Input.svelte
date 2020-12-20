@@ -6,7 +6,7 @@
     // Takes the input and sends it to the server
     function handleInput(e: Event): void {
         const textarea = e.target as HTMLTextAreaElement
-        console.log(textarea.value);
+        console.log("> Text input detected in textarea with id " + textarea.id);
 
         switch (textarea.id) {
             case "simp":
@@ -23,17 +23,24 @@
 
     // Takes the output and sets it in the other text box
     function setOutput(textarea: HTMLTextAreaElement, str: string): void {
+        // Get other textarea
+        let textareaToSwitch: HTMLTextAreaElement;
         switch(textarea.id) {
             case "simp":
-                (document.getElementById("trad") as HTMLTextAreaElement).value = str;
+                textareaToSwitch = document.getElementById("trad") as HTMLTextAreaElement;
                 break;
             case "trad":
-                (document.getElementById("simp") as HTMLTextAreaElement).value = str;
+                textareaToSwitch = document.getElementById("simp") as HTMLTextAreaElement;
                 break;
             default:
                 textarea.value = "There was an error parsing your text."
                 break;
         }
+
+        // Change color and set output
+        textarea.style.color = null;
+        textareaToSwitch.style.color = "SteelBlue";
+        textareaToSwitch.value = str;
     } 
 </script>
 
