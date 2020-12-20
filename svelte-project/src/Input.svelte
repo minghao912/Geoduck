@@ -1,5 +1,40 @@
 <script lang="ts">
-    export let simpContent = "", tradContent = "";
+    import * as communicator from './communicator';
+
+    const placeholder = "Start typing...";
+
+    // Takes the input and sends it to the server
+    function handleInput(e: Event): void {
+        const textarea = e.target as HTMLTextAreaElement
+        console.log(textarea.value);
+
+        switch (textarea.id) {
+            case "simp":
+                communicator.convert(communicator.Direction.s2t, textarea.value).then(output => setOutput(textarea, output));
+                break;
+            case "trad":
+                communicator.convert(communicator.Direction.t2s, textarea.value).then(output => setOutput(textarea, output));
+                break;
+            default:
+                textarea.value = "There was an error parsing your text."
+                break;
+        }
+    }
+
+    // Takes the output and sets it in the other text box
+    function setOutput(textarea: HTMLTextAreaElement, str: string): void {
+        switch(textarea.id) {
+            case "simp":
+                (document.getElementById("trad") as HTMLTextAreaElement).value = str;
+                break;
+            case "trad":
+                (document.getElementById("simp") as HTMLTextAreaElement).value = str;
+                break;
+            default:
+                textarea.value = "There was an error parsing your text."
+                break;
+        }
+    } 
 </script>
 
 <main>
@@ -12,7 +47,7 @@
                 <hr class="my-2" style="border-top:1px solid black;">
                 <div class="form-group full-size">
                     <label class="full-size" for="simp">
-                    <textarea class="form-control" id="simp" rows="10" cols="25">{simpContent}</textarea>
+                        <textarea class="form-control" id="simp" rows="10" cols="25" on:input={(e) => handleInput(e)} {placeholder}></textarea>
                     </label>
                 </div>
             </div>
@@ -23,7 +58,7 @@
                 <hr class="my-2" style="border-top:1px solid black;">
                 <div class="form-group full-size">
                     <label class="full-size" for="trad">
-                        <textarea class="form-control" id="trad" rows="10" cols="25">{tradContent}</textarea>
+                        <textarea class="form-control" id="trad" rows="10" cols="25" on:input={(e) => handleInput(e)} {placeholder}></textarea>
                     </label>
                 </div>
             </div>

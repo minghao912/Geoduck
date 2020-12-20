@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-body">
                         <p>
-                            Start typing, and the output should be in the other box.
+                            Start typing, and the output will appear in the other box.
                         </p>
                     </div>
                 </div>

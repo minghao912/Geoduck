@@ -5,8 +5,8 @@
 
 <main>
     <div class="container text-container">
-        <div class="row my-3 center-children full-size">
-            <div class="col mx-2 full-size">
+        <div class="row my-3 center-children">
+            <div class="col mx-2">
                 <p>This is the API page.</p>
             </div>
         </div>
@@ -34,6 +34,7 @@
 
     .center-children {
         text-align: center;
+        justify-content: center;
         align-content: center;
     }
 
