@@ -29,13 +29,10 @@
         <API />
 
         <!-- Button to return to Main Page -->
-        <div class="container text-center">
-            <div class="row my-3">
-                <div class="col mx-2 center-children">
-                    <button class="btn btn-secondary" on:click={renderMain}>Main Page</button>
-                </div>
-            </div>
+        <div class="container float pointer-hover">
+            <span><i class="centered-item fas fa-home fa-2x" on:click={renderMain}></i></span>
         </div>
+
     {:else if pageToShow == Page.MAIN}
         <Main />
     {:else}
@@ -73,10 +70,26 @@
         display: inline-block;
     }
 
-    .center-children {
+    .centered-item {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 80px;
+        right: 40px;
+        background-color: #292929;
+        color: ghostwhite;
+        border-radius: 50px;
         text-align: center;
-        justify-content: center;
-        align-content: center;
+        padding-top: 2.5vw;
     }
 
     .p-link {
@@ -86,5 +99,9 @@
     .p-link:hover {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    .pointer-hover:hover {
+        cursor: pointer;
     }
 </style>

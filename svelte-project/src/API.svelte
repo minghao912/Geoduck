@@ -43,13 +43,4 @@
         height: 100%;
         min-height: 100%;
     }
-
-    .p-link {
-	    text-decoration: none;
-    }
-
-    .p-link:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
 </style>
