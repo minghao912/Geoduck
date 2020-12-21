@@ -4,7 +4,7 @@ export enum Direction {
 };
 
 export async function convert(direction: Direction, query: string): Promise<string> {
-    let url = `http://node.dragonfruit.tk/panda_linux/${direction}?query=${query}`;
+    let url = `https://node.dragonfruit.tk/panda_linux/${direction}?query=${query}`;
     
     console.log("> Direction is " + direction + ", query is " + query);
     console.log("> GET URL: " + url);

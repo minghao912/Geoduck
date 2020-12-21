@@ -25,7 +25,7 @@ export function handleRequest(request, response): void {
     const href = url.parse(request.url).href;   // includes ?xxx portion
 
     // Set CORS headers
-    response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Request-Method', '*');
     response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     response.setHeader('Access-Control-Allow-Headers', '*');
