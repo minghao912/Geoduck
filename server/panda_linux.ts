@@ -55,15 +55,16 @@ async function getData(direction: string, query: string): Promise<Panda> {
         }
 
         // Convert
+        let cleanQuery = query.split("=");            // Remove the "query=" part of the query string
         let result: string;
         await OpenCC.Converter(dir[0], dir[1]).then(convert => {
-            result = convert(query.substring(6)) as string;   // Remove the "query=" part of the query string
+            result = convert(cleanQuery[1]) as string;   
             console.log("> Result: " + result);
         });
 
         // Put into correct form
         data = {
-            "original": query,
+            "original": cleanQuery[1],
             "conversion": result
         }
 

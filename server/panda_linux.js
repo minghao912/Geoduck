@@ -74,7 +74,7 @@ function getData(direction, query) {
                 "conversion": ""
             };
             return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                    var dir, result;
+                    var dir, cleanQuery, result;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
@@ -88,15 +88,16 @@ function getData(direction, query) {
                                     default:
                                         return [2 /*return*/, reject(null)];
                                 }
+                                cleanQuery = query.split("=");
                                 return [4 /*yield*/, OpenCC.Converter(dir[0], dir[1]).then(function (convert) {
-                                        result = convert(query.substring(6)); // Remove the "query=" part of the query string
+                                        result = convert(cleanQuery[1]);
                                         console.log("> Result: " + result);
                                     })];
                             case 1:
                                 _a.sent();
                                 // Put into correct form
                                 data = {
-                                    "original": query,
+                                    "original": cleanQuery[1],
                                     "conversion": result
                                 };
                                 resolve(data);
