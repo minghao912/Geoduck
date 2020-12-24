@@ -8,9 +8,9 @@
 
     <!-- Instructions -->
     <div class="container text-center">
-        <div class="row my-2">
+        <div class="row mt-2">
             <div class="col mx-3 full-size">
-                <div class="card border-primary my-2 center-children">
+                <div class="card border-primary mt-2 center-children">
                     <div class="card-header">
                         <h3>Instructions</h3>
                     </div>
