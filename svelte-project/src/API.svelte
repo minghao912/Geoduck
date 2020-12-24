@@ -1,15 +1,41 @@
 <script lang="ts">
 
-
 </script>
 
 <main>
     <div class="container text-container">
-        <div class="row my-3 center-children">
+        <div class="row my-3 center-children" id="intro">
             <div class="col mx-2">
-                <p>This is the API page.</p>
+                <p>Requests can be made directly via HTTP or HTTPS. The server responds to GET requests to:
+                <samp>http[s]://node.dragonfruit.tk/panda_linux/&lt;direction&gt;?query=&lt;query&gt;</samp>
+                </p>
+                <p>The server responds with an object in the following format:</p>
+
             </div>
         </div>
+
+        <div class="row my-3 center-children" id="code-examples">
+            <div class="col mx-2">
+                <div class="row my-2">
+                    <div class="col mx-2">
+                        <div class="card bg-secondary">
+                            <div class="card-header">HTTP</div>
+                            <div class="card-body">
+                                <pre><code class="language-js">
+                                    import * as http from 'http';
+                                    http.get('http://node.dragonfruit.tk:/panda_linux/s2t?query=你好吗', (response) =&gt; {'{...}'}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <pre><code class="language-js">
+            import * as http from 'http';
+            http.get('http://node.dragonfruit.tk:/panda_linux/s2t?query=你好吗', (response) =&gt; {'{...}'}
+        </code></pre>
     </div>
 </main>
 
