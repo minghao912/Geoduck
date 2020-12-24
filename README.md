@@ -7,6 +7,6 @@ Makes heavy use of [OpenCC](https://github.com/BYVoid/OpenCC) and the fork [open
 This repository contains both the server-side node.js code and client-side browser code (using Svelte).
 The server handles GET requests to certain URLs in form "/direction?query=abc" and responds with the converted output as a JSON.
 
-View the live site [here](https://dragonfruit.tk/pandacc)
+View the live site [here](https://dragonfruit.tk/pandacc).
 
-※ This is very niche and basically useless. I made this because I was taking a Japanese class and to write my Chinese name in Japanese, I have to use traditional characters. Since I didn't want to add a Traditional input method, every time I wanted to write my name, I would use Google Translate to "translate" between Chinese (Simplified) and Chinese (Traditional) and copy/paste into my Word doc, which was めんどうくさい because of all the buttons you have to press to change languages.
+※ This is a very niche application. I made this because I was taking a Japanese class and to write my Chinese name in Japanese, I have to use traditional characters. Since I didn't want to add a Traditional input method, every time I wanted to write my name, I would use Google Translate to "translate" between Chinese (Simplified) and Chinese (Traditional) and copy/paste into my Word doc, which was めんどうくさい because of all the buttons you have to press to change languages.
