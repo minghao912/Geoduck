@@ -1,7 +1,17 @@
 <script lang="ts">
     import * as communicator from './communicator';
+    import * as constants from './constants';
 
-    const placeholder = "Start typing...";
+    export let lang: constants.Lang = constants.Lang.CHINESE;
+
+    let placeholder: string;
+    $: {
+        placeholder = (function() {
+            if (lang == constants.Lang.CHINESE)
+                return "在此输入";
+            else return "Start typing...";
+        })();
+    }
 
     // Takes the input and sends it to the server
     // Timeout stuff makes it so that it only runs the conversion when user stops typing for specified delay
@@ -56,7 +66,11 @@
         <div class="row mt-10 d-flex" style="align-content:center; min-width:100vh; min-height:50vh;">
             <div class="col mx-3 my-2 full-size">
                 <h2 class="align-center my-2">
-                    Simplified
+                    {#if lang == constants.Lang.ENGLISH}
+                        Simplified
+                    {:else if lang == constants.Lang.CHINESE}
+                        简体字
+                    {/if}
                 </h2>
                 <hr class="my-2" style="border-top:1px solid black;">
                 <div class="form-group full-size">
@@ -67,7 +81,11 @@
             </div>
             <div class="col mx-3 my-2 full-size">
                 <h2 class="align-center my-2">
-                    Traditional
+                    {#if lang == constants.Lang.ENGLISH}
+                        Traditional
+                    {:else if lang == constants.Lang.CHINESE}
+                        繁體字
+                    {/if}
                 </h2>
                 <hr class="my-2" style="border-top:1px solid black;">
                 <div class="form-group full-size">
