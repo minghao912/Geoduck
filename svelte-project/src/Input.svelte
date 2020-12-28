@@ -62,8 +62,8 @@
 </script>
 
 <main>
-    <div class="container text-center">
-        <div class="row mt-10 d-flex" style="align-content:center; min-width:100vh; min-height:50vh;">
+    <div class="container text-center" id="input-container">
+        <div class="row mt-10 d-flex" style="align-content:center;">
             <div class="col mx-3 my-2 full-size">
                 <h2 class="align-center my-2">
                     {#if lang == constants.Lang.ENGLISH}
@@ -111,5 +111,10 @@
         width: 100%;
         height: 100%;
         min-height: 100%;
+    }
+
+    #input-container {
+        left: 50%;
+        right: 50%;
     }
 </style>

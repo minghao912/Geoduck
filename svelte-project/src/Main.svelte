@@ -11,9 +11,9 @@
 
     <!-- Instructions -->
     <div class="container text-center">
-        <div class="row mt-2">
+        <div class="row mt-2 d-flex">
             <div class="col mx-3 full-size">
-                <div class="card border-primary mt-2 center-children">
+                <div class="card border-primary mt-2 center-children" id="instructions-card">
                     <div class="card-header">
                         <h3>
                             {#if lang == constants.Lang.ENGLISH}
@@ -48,5 +48,11 @@
         width: 100%;
         height: 100%;
         min-height: 100%;
+        min-width: 80%;
+    }
+
+    #instructions-card {
+        margin: auto;
+        width: 100%;
     }
 </style>

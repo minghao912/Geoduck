@@ -28,22 +28,24 @@
         <h1 class="my-3 text-white">PandaCC</h1>
     </header>
 
-    <!-- Show "page" content -->
-    {#if pageToShow == constants.Page.API}
-        <API />
+    <div class="container" id="base-container">
+        <!-- Show "page" content -->
+        {#if pageToShow == constants.Page.API}
+            <API />
 
-        <!-- Button to return to Main Page -->
-        <div class="container float pointer-hover" on:click={renderMain}>
-            <span><i class="centered-item fas fa-home fa-2x"></i></span>
-        </div>
+            <!-- Button to return to Main Page -->
+            <div class="container float pointer-hover" on:click={renderMain}>
+                <span><i class="centered-item fas fa-home fa-2x"></i></span>
+            </div>
 
-    {:else if pageToShow == constants.Page.MAIN}
-        <Main lang={langToShow}/>
-    {:else}
-        <div class="row my-5" style="width:100%; justify-content:center;">
-            <h1>404 Content Not Found</h1>
-        </div>
-    {/if}
+        {:else if pageToShow == constants.Page.MAIN}
+            <Main lang={langToShow}/>
+        {:else}
+            <div class="row my-5" style="width:100%; justify-content:center;">
+                <h1>404 Content Not Found</h1>
+            </div>
+        {/if}
+    </div>
 
     <!-- Change language button -->
     {#if pageToShow == constants.Page.MAIN}
@@ -79,6 +81,14 @@
 
     footer > * {
         display: inline-block;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-around;
+        width:100%;
+        position: fixed;
+        top: 0;
     }
 
     .centered-item {
@@ -129,5 +139,11 @@
 
     .pointer-hover:hover {
         cursor: pointer;
+    }
+
+    #base-container {
+        margin-top: 90px;
+        margin-bottom: 80px;
+        align-content: center;
     }
 </style>
