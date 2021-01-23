@@ -14,7 +14,7 @@
 <main>
     <div class="container text-container" style="margin-bottom: 60px;">
         <div class="row mt-3 mb-2 center-children" id="intro">
-            <div class="col mx-2">
+            <div class="col mt-4 mb-2">
                 <p>Requests can be made directly via HTTP or HTTPS. The server responds to GET requests to:<br />
                 <samp>http[s]://node.dragonfruit.tk/panda_linux/&lt;direction&gt;?query=&lt;query&gt;</samp>
                 </p>
@@ -71,7 +71,7 @@
                 <div class="row">
                     <h2>Usage Examples</h2>
                 </div>
-                <div class="row mt-1 mb-2" id="https">
+                <div class="row mt-1 mb-3" id="https">
                     <div class="col mx-2">
                         <div class="card">
                             <div class="card-header">Valid URL</div>
@@ -109,18 +109,6 @@
 </main>
 
 <style>
-    a {
-	    text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    footer > * {
-        display: inline-block;
-    }
-
     .bg-code {
         background-color: #1d1f21 !important;
     }
@@ -129,11 +117,5 @@
         text-align: center;
         justify-content: center;
         align-content: center;
-    }
-
-    .full-size {
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
     }
 </style>
