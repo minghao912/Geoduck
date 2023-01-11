@@ -1,5 +1,4 @@
-"use strict";
-exports.__esModule = true;
-var http = require("http");
-var router = require("./router");
-http.createServer(router.handleRequest).listen(8080, '0.0.0.0');
+import * as http from 'http';
+import * as router from './router';
+const PORT = 8070;
+http.createServer(router.handleRequest).listen(PORT, '0.0.0.0');

@@ -1,14 +1,11 @@
-"use strict";
-exports.__esModule = true;
-exports.handleRequest = void 0;
-var url = require("url");
-var fs = require("fs");
-var test = require("./test/test");
+import * as url from 'url';
+import * as fs from 'fs';
+import * as test from './test/test';
 //import * as panda from './panda';
-var panda_linux = require("./panda_linux");
+import * as panda_linux from './panda_linux';
 function renderHTML(filepath, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
-    fs.readFile(filepath, null, function (err, data) {
+    fs.readFile(filepath, null, (err, data) => {
         if (err) {
             response.writeHead(404);
             response.write('File not found: ' + filepath);
@@ -19,17 +16,17 @@ function renderHTML(filepath, response) {
         response.end();
     });
 }
-function handleRequest(request, response) {
-    var path = url.parse(request.url).pathname;
-    var href = url.parse(request.url).href; // includes ?xxx portion
+export function handleRequest(request, response) {
+    const path = url.parse(request.url).pathname;
+    const href = url.parse(request.url).href; // includes ?xxx portion
     // Set CORS headers
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Request-Method', '*');
     response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     response.setHeader('Access-Control-Allow-Headers', '*');
     // Transfer all "/panda/xxx" requests to panda
-    var pathSplit = path.split('/');
-    var firstDirectory;
+    const pathSplit = path.split('/');
+    let firstDirectory;
     if (pathSplit.length >= 1) {
         firstDirectory = pathSplit[1];
         /*// For "/panda/xxx"
@@ -54,4 +51,3 @@ function handleRequest(request, response) {
             break;
     }
 }
-exports.handleRequest = handleRequest;

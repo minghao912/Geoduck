@@ -42,7 +42,7 @@ async function getData(direction: string, query: string): Promise<Panda> {
     
     return new Promise(async (resolve, reject) => {
         // Get direction
-        let dir: [string, string];
+        let dir: [OpenCC.Locale, OpenCC.Locale];
         switch(direction) {
             case "s2t":
                 dir = ['cn', 't'];
@@ -57,17 +57,16 @@ async function getData(direction: string, query: string): Promise<Panda> {
         // Convert
         let cleanQuery = query.split("=");            // Remove the "query=" part of the query string
         let result: string;
-        await OpenCC.Converter(dir[0], dir[1]).then(convert => {
-            result = convert(cleanQuery[1]) as string;   
-            console.log("> Result: " + result);
-        });
+        const converter = await OpenCC.Converter({from: dir[0], to: dir[1]});
+        
+        result = converter(cleanQuery[1]);   
+        console.log("> Result: " + result);
 
         // Put into correct form
         data = {
             "original": cleanQuery[1],
             "conversion": result
         }
-
     
         resolve(data);
     });

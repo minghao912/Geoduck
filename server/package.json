@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@types/opencc-js": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "opencc-js": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
+}
