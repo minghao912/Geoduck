@@ -8,4 +8,6 @@ const options = {
     cert: fs.readFileSync("/etc/ssl/cloudflare/cert.pem")
 };
 
-https.createServer(options, router.handleRequest).listen(8443, '0.0.0.0');
+const PORT = 8071;
+
+https.createServer(options, router.handleRequest).listen(8071, '0.0.0.0');
